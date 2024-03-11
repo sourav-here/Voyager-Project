@@ -7,7 +7,7 @@ class SearchBox extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     return Container(
         decoration: const BoxDecoration(
             color: Colors.white,
@@ -20,7 +20,7 @@ class SearchBox extends StatelessWidget {
               hintStyle: TextStyle(
                   fontSize: 16, color: Color.fromRGBO(174, 213, 210, 1)),
               contentPadding: EdgeInsets.all(16),
-              suffixIcon: Icon(Icons.search, color: Colors.black87)),
+              suffixIcon: IconButton(onPressed: null, icon: Icon(Icons.search_rounded))),
         ));
   }
 }

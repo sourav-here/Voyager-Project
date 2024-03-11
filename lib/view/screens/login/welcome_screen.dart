@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:travel_app/screens/login/login_screen.dart';
-import 'package:travel_app/screens/login/signup_screen.dart';
+import 'package:travel_app/view/screens/login/login_screen.dart';
+import 'package:travel_app/view/screens/login/signup_screen.dart';
+
 
 
 

@@ -6,11 +6,13 @@ class AddPageForm extends StatelessWidget {
     required this.hintText,
     this.controller,
     this.suffixIcon,
+    this.validator,
   }) : super(key: key);
 
   final String hintText;
   final TextEditingController? controller;
   final IconData? suffixIcon;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,7 @@ class AddPageForm extends StatelessWidget {
                   : null,
             ),
             controller: controller,
+            validator: validator,
           ),
         ),
       ),

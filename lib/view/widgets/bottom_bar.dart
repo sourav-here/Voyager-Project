@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/screens/add_screen.dart';
-import 'package:travel_app/screens/confirm_screen.dart';
-import 'package:travel_app/screens/home_screen.dart';
-import 'package:travel_app/screens/user_screen.dart';
+import 'package:travel_app/view/screens/add_screen.dart';
+import 'package:travel_app/view/screens/confirm_screen.dart';
+import 'package:travel_app/view/screens/home_screen.dart';
+import 'package:travel_app/view/screens/user_screen.dart';
+
 
 class CircularBottomBar extends StatelessWidget {
   const CircularBottomBar({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/widgets/bottom_bar.dart';
-import 'package:travel_app/widgets/confirm_head.dart';
+import 'package:travel_app/view/subscreens/confirm_head.dart';
+import 'package:travel_app/view/widgets/bottom_bar.dart';
 
 class ConfirmScreen extends StatelessWidget {
   const ConfirmScreen({super.key});

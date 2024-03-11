@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/screens/login/welcome_screen.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:travel_app/model/tripmodel/trip_model.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:travel_app/view/screens/login/welcome_screen.dart';
 
-
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  if (!Hive.isAdapterRegistered(TripModelAdapter().typeId)) {
+    Hive.registerAdapter(TripModelAdapter());
+  }
+  Hive.openBox<TripModel>('tripDb');
   runApp(const MyApp());
 }
+
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -20,4 +29,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

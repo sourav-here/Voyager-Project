@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/widgets/bottom_bar.dart';
-import 'package:travel_app/widgets/user_head.dart';
-import 'package:travel_app/widgets/userlist.dart';
+import 'package:travel_app/view/subscreens/about.dart';
+import 'package:travel_app/view/subscreens/user_head.dart';
+import 'package:travel_app/view/subscreens/userlist.dart';
+import 'package:travel_app/view/widgets/bottom_bar.dart';
+
 
 class UserScreen extends StatelessWidget {
   const UserScreen({super.key});
@@ -24,7 +26,9 @@ class UserScreen extends StatelessWidget {
               ),
               UserTile(icon: const Icon(Icons.person_3), text: 'Profile', onpressed: () {}),
               const SizedBox(height: 10),
-              UserTile(icon: const Icon(Icons.info_outline_rounded), text: 'About', onpressed: () {}),
+              UserTile(icon: const Icon(Icons.info_outline_rounded), text: 'About', onpressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutPage()));
+              }),
               const SizedBox(height: 10),
               UserTile(icon: const Icon(Icons.private_connectivity_outlined), text: 'Privacy & Policy', onpressed: () {}),
               const SizedBox(height: 10),

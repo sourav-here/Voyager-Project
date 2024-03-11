@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/widgets/bottom_bar.dart';
-import 'package:travel_app/widgets/home_card.dart';
-import 'package:travel_app/widgets/homehead.dart';
+import 'package:travel_app/view/subscreens/home_card.dart';
+import 'package:travel_app/view/subscreens/homehead.dart';
+import 'package:travel_app/view/widgets/bottom_bar.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -80,7 +81,7 @@ class HomeScreen extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            "See All",
+                            "Scroll down",
                             style: TextStyle(fontSize: 16),
                           ),
                           Icon(
