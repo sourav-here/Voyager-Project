@@ -17,7 +17,6 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
     navigate();
   }
 
@@ -30,11 +29,10 @@ class SplashScreenState extends State<SplashScreen> {
 
   void navigate() async {
     var shared = await SharedPreferences.getInstance();
-
     var isLoggedIn = shared.getBool(KEY);
 
     Future.delayed(const Duration(milliseconds: 1), () {
-      if (isLoggedIn != null) {
+      if (isLoggedIn != null && isLoggedIn) {
          if (isLoggedIn) {
           Navigator.pushReplacement(
             context,

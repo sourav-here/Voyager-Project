@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:travel_app/model/tripmodel/trip_model.dart';
 import 'package:travel_app/view/screens/details_screen.dart';
 import 'package:travel_app/view/subscreens/add_page.dart';
+import 'package:travel_app/view/subscreens/edit_screen.dart';
 import 'package:travel_app/view/widgets/bottom_bar.dart';
 import 'package:travel_app/view/widgets/search.dart';
 
@@ -94,8 +95,8 @@ class _AddScreenState extends State<AddScreen> {
                               wayofTravel: trip.wayofTravel,
                               date: trip.date.toString(),
                               totalDay: trip.totalDay.toString(),
+                              budget: trip.budget.toString(),
                               image: trip.image,
-                              budget: '',
                             ),
                           ),
                         );
@@ -112,32 +113,56 @@ class _AddScreenState extends State<AddScreen> {
                           Text(trip.wayofTravel),
                         ],
                       ),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.delete_outline_rounded),
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: const Text('Delete Trip'),
-                              content: const Text('Are you sure about this?'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text('Cancel'),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.edit),
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => EditPage(
+                                    destination: trip.destination,
+                                    wayofTravel: trip.wayofTravel,
+                                    budget: trip.budget.toString(),
+                                    date: trip.date.toString(),
+                                    totalDay: trip.totalDay.toString(),
+                                    imagepath: trip.image, 
+                                  ),
                                 ),
-                                TextButton(
-                                  onPressed: () {
-                                    deleteTrip(index);
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text('Delete'),
+                              );
+                            },
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.delete_outline_rounded),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: const Text('Delete Trip'),
+                                  content:
+                                      const Text('Are you sure about this?'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        deleteTrip(index);
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('Delete'),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          );
-                        },
+                              );
+                            },
+                          ),
+                        ],
                       ),
                     ),
                   );
