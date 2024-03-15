@@ -1,41 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/view/subscreens/add_page.dart';
 
 class HomeCard extends StatelessWidget {
   const HomeCard({
-    super.key,
+    Key? key,
     required this.imagePath,
-    required this.scenryName,
+    required this.sceneryName,
     required this.placeName,
-  });
+    required this.onTap,
+  }) : super(key: key);
 
   final String imagePath;
-  final String scenryName;
+  final String sceneryName;
   final String placeName;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: GestureDetector(
-         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const AddPage()),
-          );
-        },
+        onTap: onTap,
         child: Card(
           color: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.0),
           ),
-          elevation: 2 ,
+          elevation: 2,
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(
               children: [
-                Image.asset(
-                  imagePath,
-                  fit: BoxFit.cover,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(16.0), 
+                  child: Image.asset(
+                    imagePath,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 const SizedBox(
                   height: 16,
@@ -48,9 +47,11 @@ class HomeCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            scenryName,
+                            sceneryName,
                             style: const TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           const SizedBox(
                             height: 8,

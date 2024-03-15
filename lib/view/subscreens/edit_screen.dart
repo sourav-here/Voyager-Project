@@ -8,15 +8,15 @@ import 'package:travel_app/view/screens/add_screen.dart';
 import 'package:travel_app/view/subscreens/add_form.dart';
 
 class EditPage extends StatefulWidget {
-  const EditPage(
-      {super.key,
-      required this.destination,
-      required this.wayofTravel,
-      required this.budget,
-      required this.date,
-      required this.totalDay,
-      required this.imagepath,
-      });
+  const EditPage({
+    super.key,
+    required this.destination,
+    required this.wayofTravel,
+    required this.budget,
+    required this.date,
+    required this.totalDay,
+    required this.imagepath,
+  });
 
   final dynamic destination;
   final dynamic wayofTravel;
@@ -170,7 +170,10 @@ class _AddPageState extends State<EditPage> {
                       onPressed: () {
                         if (_formkey.currentState!.validate()) {
                           addClicked();
-                          Navigator.pop(context);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const AddScreen()));
                         }
                       },
                       style: TextButton.styleFrom(

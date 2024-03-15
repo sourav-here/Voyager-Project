@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:travel_app/model/tripmodel/trip_model.dart';
 import 'package:travel_app/view/screens/details_screen.dart';
+import 'package:travel_app/view/subscreens/add_head.dart';
 import 'package:travel_app/view/subscreens/add_page.dart';
 import 'package:travel_app/view/subscreens/edit_screen.dart';
 import 'package:travel_app/view/widgets/bottom_bar.dart';
@@ -53,19 +54,26 @@ class _AddScreenState extends State<AddScreen> {
         child: Column(
           children: [
             const SizedBox(height: 44),
-            const Text(
-              "Your",
-              style: TextStyle(fontSize: 32, color: Colors.black),
-            ),
-            const SizedBox(height: 12),
-            const Text(
-              "BucketList",
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+            const AddHead(),
+            const SizedBox(height: 34,),
+            const Row(
+                children: [
+                  Text(
+                    "Your",
+                    style: TextStyle(fontSize: 32, color: Colors.black),
+                  ),
+                  SizedBox(
+                    width: 12,
+                  ),
+                  Text(
+                    "BucketList",
+                    style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  ),
+                ],
               ),
-            ),
             const SizedBox(height: 16),
             const Text(
               "“Dream it. Do it. Tick off that bucket list one epic adventure at a time.”",
@@ -135,7 +143,7 @@ class _AddScreenState extends State<AddScreen> {
                             },
                           ),
                           IconButton(
-                            icon: Icon(Icons.delete_outline_rounded),
+                            icon: const Icon(Icons.delete_outline_rounded),
                             onPressed: () {
                               showDialog(
                                 context: context,
