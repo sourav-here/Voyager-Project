@@ -1,7 +1,6 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:travel_app/functions/functions.dart';
 import 'package:travel_app/model/tripmodel/trip_model.dart';
 import 'package:travel_app/view/screens/details_screen.dart';
 import 'package:travel_app/view/subscreens/add_head.dart';
@@ -19,6 +18,8 @@ class AddScreen extends StatefulWidget {
 
 class _AddScreenState extends State<AddScreen> {
   List<TripModel> trips = [];
+  List<TripModel> filteredTrips = [];
+  List<int> tripSum = [];
 
   @override
   void initState() {
@@ -26,12 +27,7 @@ class _AddScreenState extends State<AddScreen> {
     fetchTrips();
   }
 
-  Future<void> fetchTrips() async {
-    final tripBox = await Hive.openBox<TripModel>('tripBox');
-    setState(() {
-      trips = tripBox.values.toList();
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -80,13 +76,15 @@ class _AddScreenState extends State<AddScreen> {
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 24),
-            const SearchBox(),
+            SearchBox(
+              onSearchTextChanged: searchTrips,
+            ),
             const SizedBox(height: 24),
             Expanded(
               child: ListView.builder(
-                itemCount: trips.length,
+                itemCount: filteredTrips.length,
                 itemBuilder: (context, index) {
-                  final trip = trips[index];
+                  final trip = filteredTrips[index];
                   return Container(
                     margin: const EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
@@ -184,9 +182,23 @@ class _AddScreenState extends State<AddScreen> {
     );
   }
 
-  Future<void> deleteTrip(int index) async {
-    final tripBox = await Hive.openBox<TripModel>('tripBox');
-    await tripBox.deleteAt(index);
+   Future<void> deleteTrip(int index) async {
+    await TripOperations.deleteTrip(index);
     fetchTrips();
+  }
+
+  Future<void> fetchTrips() async {
+    final fetchedTrips = await TripOperations.fetchTrips();
+    setState(() {
+      trips = fetchedTrips;
+      filteredTrips = trips;
+    });
+  }
+
+  void searchTrips(String searchText) {
+    final searchedTrips = TripOperations.searchTrips(trips, searchText);
+    setState(() {
+      filteredTrips = searchedTrips;
+    });
   }
 }

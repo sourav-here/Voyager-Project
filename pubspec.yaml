@@ -19,6 +19,7 @@ dependencies:
   hive_flutter: ^1.1.0
   image_picker: ^1.0.7
   intl:
+  charts_flutter:
 
 flutter_launcher_icons:
   android: "launcher_icon"

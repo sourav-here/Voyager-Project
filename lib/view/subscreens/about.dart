@@ -14,6 +14,7 @@ class AboutPage extends StatelessWidget {
           fit: BoxFit.cover,
         ),
         const Scaffold(
+          backgroundColor: Colors.transparent,
           body: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),

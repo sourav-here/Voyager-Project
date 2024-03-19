@@ -13,12 +13,9 @@ class JournalPage extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           fit: BoxFit.cover,
         ),
-        Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.black,
-            title: const Text('Travel Journal'),
-          ),
-          body: const SingleChildScrollView(
+        const Scaffold(
+          backgroundColor: Colors.transparent,
+          body: SingleChildScrollView(
             padding: EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +61,7 @@ class JournalPage extends StatelessWidget {
         
                   "Traveling tends to magnify all human emotions." – Peter Hoeg
                   ''',
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: 16,color: Colors.white),
                 ),
               ],
             ),

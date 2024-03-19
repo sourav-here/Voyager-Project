@@ -13,12 +13,9 @@ class PrivacyPage extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           fit: BoxFit.cover,
         ),
-        Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.black,
-            title: const Text('Privacy Policy'),
-          ),
-          body: const SingleChildScrollView(
+        const Scaffold(
+          backgroundColor: Colors.transparent,
+          body: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: Column(
@@ -27,7 +24,7 @@ class PrivacyPage extends StatelessWidget {
                   SizedBox(height: 30),
                   Text(
                     'Our Commitment to Privacy',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold,),
                   ),
                   Text(
                     '''
