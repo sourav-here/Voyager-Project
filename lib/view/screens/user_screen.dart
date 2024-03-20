@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:travel_app/model/complete_model/complete_model.dart';
+import 'package:travel_app/model/tripmodel/trip_model.dart';
 // import 'package:hive/hive.dart';
 // import 'package:travel_app/model/tripmodel/trip_model.dart';
 import 'package:travel_app/view/screens/login/signup_screen.dart';
@@ -118,28 +121,33 @@ class _UserScreenState extends State<UserScreen> {
     );
   }
 
-  // void resetDialogue() {
-  //   showDialog(
-  //       context: context,
-  //       useSafeArea: true,
-  //       builder: (context) => AlertDialog(
-  //             scrollable: true,
-  //             content: const Text('Reset the app'),
-  //             actions: [
-  //               TextButton(
-  //                   onPressed: () {
-  //                     setState(() {
-  //                       Hive.box<TripModel>('tripDb').clear();
-  //                     });
-  //                     Navigator.pop(context);
-  //                   },
-  //                   child: const Text('Reset',style: TextStyle(color: Colors.black),)),
-  //               TextButton(
-  //                   onPressed: () {
-  //                     Navigator.pop(context);
-  //                   },
-  //                   child: const Text('Cancel',style: TextStyle(color: Colors.black)))
-  //             ],
-  //           ));
-  // }
+//   void reset() {
+//   showDialog(
+//     context: context,
+//     useSafeArea: true,
+//     builder: (context) => AlertDialog(
+//       scrollable: true,
+//       content: const Text('Reset the app'),
+//       actions: [
+//         TextButton(
+//           onPressed: () {
+//             setState(() {
+//               Hive.box<TripModel>('tripDb').clear();
+//               Hive.box<CompleteModel>('completeDb').clear();
+//             });
+//             Navigator.pop(context);
+//           },
+//           child: const Text('OK', style: TextStyle(color: Colors.red)),
+//         ),
+//         TextButton(
+//           onPressed: () {
+//             Navigator.pop(context);
+//           },
+//           child: const Text('Cancel', style: TextStyle(color: Colors.black)),
+//         ),
+//       ],
+//     ),
+//   );
+// }
+
 }

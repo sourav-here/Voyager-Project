@@ -19,7 +19,6 @@ class AddScreen extends StatefulWidget {
 class _AddScreenState extends State<AddScreen> {
   List<TripModel> trips = [];
   List<TripModel> filteredTrips = [];
-  List<int> tripSum = [];
 
   @override
   void initState() {
@@ -27,14 +26,12 @@ class _AddScreenState extends State<AddScreen> {
     fetchTrips();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(221, 249, 247, 1),
-      floatingActionButton: FloatingActionButton(  
-        backgroundColor: const Color.fromARGB(255, 238, 139, 82),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color.fromARGB(255, 5, 191, 171),
         onPressed: () {
           Navigator.push(
             context,
@@ -51,25 +48,27 @@ class _AddScreenState extends State<AddScreen> {
           children: [
             const SizedBox(height: 44),
             const AddHead(),
-            const SizedBox(height: 34,),
+            const SizedBox(
+              height: 34,
+            ),
             const Row(
-                children: [
-                  Text(
-                    "Your",
-                    style: TextStyle(fontSize: 32, color: Colors.black),
-                  ),
-                  SizedBox(
-                    width: 12,
-                  ),
-                  Text(
-                    "BucketList",
-                    style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
-                ],
-              ),
+              children: [
+                Text(
+                  "Your",
+                  style: TextStyle(fontSize: 32, color: Colors.black),
+                ),
+                SizedBox(
+                  width: 12,
+                ),
+                Text(
+                  "BucketList",
+                  style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
+                ),
+              ],
+            ),
             const SizedBox(height: 16),
             const Text(
               "“Dream it. Do it. Tick off that bucket list one epic adventure at a time.”",
@@ -86,90 +85,105 @@ class _AddScreenState extends State<AddScreen> {
                 itemBuilder: (context, index) {
                   final trip = filteredTrips[index];
                   return Container(
+                    height: 100,
                     margin: const EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 238, 139, 82),
+                      color: const Color.fromARGB(255, 143, 235, 206),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    child: ListTile(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailScreen(
-                              destination: trip.destination,
-                              wayofTravel: trip.wayofTravel,
-                              date: trip.date.toString(),
-                              totalDay: trip.totalDay.toString(),
-                              budget: trip.budget.toString(),
-                              image: trip.image,
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: 80, 
+                            height: 80, 
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.circular(
+                                  10.0), 
+                              image: trip.image.isNotEmpty
+                                  ? DecorationImage(
+                                      image: FileImage(File(trip.image)),
+                                      fit: BoxFit.cover,
+                                    )
+                                  : null,
                             ),
                           ),
-                        );
-                      },
-                      leading: CircleAvatar(
-                        backgroundImage: trip.image.isNotEmpty
-                            ? FileImage(File(trip.image))
-                            : null,
-                      ),
-                      title: Text(trip.destination),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(trip.wayofTravel),
-                        ],
-                      ),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.edit),
-                            onPressed: () {
-                              Navigator.pushReplacement(
+                        ),
+                        Expanded(
+                          child: ListTile(
+                            onTap: () {
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => EditPage(
+                                  builder: (context) => DetailScreen(
                                     destination: trip.destination,
                                     wayofTravel: trip.wayofTravel,
-                                    budget: trip.budget.toString(),
                                     date: trip.date.toString(),
                                     totalDay: trip.totalDay.toString(),
-                                    imagepath: trip.image, 
+                                    budget: trip.budget.toString(),
+                                    image: trip.image,
                                   ),
                                 ),
                               );
                             },
+                            contentPadding: const EdgeInsets.only(top: 10),
+                            title: Text(trip.destination),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(trip.wayofTravel),
+                              ],
+                            ),
                           ),
-                          IconButton(
-                            icon: const Icon(Icons.delete_outline_rounded),
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                  title: const Text('Delete Trip'),
-                                  content:
-                                      const Text('Are you sure about this?'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: const Text('Cancel'),
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        deleteTrip(index);
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: const Text('Delete'),
-                                    ),
-                                  ],
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.edit),
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditPage(
+                                  destination: trip.destination,
+                                  wayofTravel: trip.wayofTravel,
+                                  budget: trip.budget.toString(),
+                                  date: trip.date.toString(),
+                                  totalDay: trip.totalDay.toString(),
+                                  imagepath: trip.image,
                                 ),
-                              );
-                            },
-                          ),
-                        ],
-                      ),
+                              ),
+                            );
+                          },
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.delete_outline_rounded),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: const Text('Delete Trip'),
+                                content: const Text('Are you sure about this?'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text('Cancel'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      deleteTrip(index);
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text('Delete'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ],
                     ),
                   );
                 },
@@ -182,7 +196,7 @@ class _AddScreenState extends State<AddScreen> {
     );
   }
 
-   Future<void> deleteTrip(int index) async {
+  Future<void> deleteTrip(int index) async {
     await TripOperations.deleteTrip(index);
     fetchTrips();
   }

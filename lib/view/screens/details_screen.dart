@@ -1,9 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:travel_app/model/confirm_model/confirm_model.dart';
 import 'package:travel_app/view/screens/add_screen.dart';
-import 'package:travel_app/view/screens/confirm_screen.dart';
+import 'package:travel_app/view/subscreens/confirm_details.dart';
 import 'package:travel_app/view/subscreens/detail_text.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -29,14 +27,14 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   File? selectedimage;
-  String? companyName;
-  String? modelName;
+  String? destination;
+  String? budget;
 
   @override
   void initState() {
     selectedimage = widget.image != '' ? File(widget.image!) : null;
-    companyName = widget.destination;
-    modelName = widget.budget;
+    destination = widget.destination;
+    budget = widget.budget;
     super.initState();
   }
 
@@ -113,24 +111,24 @@ class _DetailScreenState extends State<DetailScreen> {
                         const SizedBox(
                           height: 20,
                         ),
-                        buildTextWidget('Destination: ${widget.destination}'),
+                        detailTextWidget('Destination: ${widget.destination}'),
                         const SizedBox(
                           height: 20,
                         ),
-                        buildTextWidget(
+                        detailTextWidget(
                             'Way of Travelling: ${widget.wayofTravel}'),
                         const SizedBox(
                           height: 20,
                         ),
-                        buildTextWidget('Budget: ${widget.budget}'),
+                        detailTextWidget('Budget: ${widget.budget}'),
                         const SizedBox(
                           height: 20,
                         ),
-                        buildTextWidget('Starting Date: ${widget.date}'),
+                        detailTextWidget('Starting Date: ${widget.date}'),
                         const SizedBox(
                           height: 20,
                         ),
-                        buildTextWidget('Total Days: ${widget.totalDay}'),
+                        detailTextWidget('Total Days: ${widget.totalDay}'),
                       ],
                     ),
                   ),
@@ -139,57 +137,24 @@ class _DetailScreenState extends State<DetailScreen> {
               const SizedBox(
                 height: 30,
               ),
-              // ElevatedButton(
-              //   onPressed: () {
-              //     Navigator.push(
-              //         context,
-              //         MaterialPageRoute(
-              //             builder: (context) => const AddScreen()));
-              //   },
-              //   style: TextButton.styleFrom(
-              //     textStyle: const TextStyle(
-              //         fontSize: 16, fontWeight: FontWeight.w500),
-              //     shape: RoundedRectangleBorder(
-              //         borderRadius: BorderRadius.circular(10)),
-              //     backgroundColor: const Color.fromARGB(255, 238, 139, 82),
-              //   ),
-              //   child: const Text(
-              //     "Confirm",
-              //     style: TextStyle(color: Colors.white),
-              //   ),
-              // ),
               ElevatedButton(
                 onPressed: () {
-                  final confirmedTrip = ConfirmModel(
-                    destination: widget.destination,
-                    wayofTravel: widget.wayofTravel,
-                    budget: int.parse(widget.budget),
-                    date: widget.date ?? "",
-                    totalDay: widget.totalDay ?? "",
-                    image: widget.image,
-                  );
-                  // Here, you can save the confirmed trip to Hive or any other storage mechanism
-                  // For example, you can use Hive:
-                  final confirmBox = Hive.box<ConfirmModel>('confirmBox');
-                  confirmBox.add(confirmedTrip);
-
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const ConfirmScreen()),
+                      builder: (context) => CompleteDetails(
+                        destination: widget.destination,
+                        image: widget.image!,
+                      ),
+                    ),
                   );
                 },
-                style: TextButton.styleFrom(
-                  textStyle: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w500),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
+                style: ElevatedButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   backgroundColor: const Color.fromARGB(255, 238, 139, 82),
                 ),
-                child: const Text(
-                  "Confirm",
-                  style: TextStyle(color: Colors.white),
-                ),
+                child: const Text("Completed", style: TextStyle(color: Colors.white)),
               ),
 
               const SizedBox(

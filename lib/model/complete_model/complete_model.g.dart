@@ -1,46 +1,40 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'confirm_model.dart';
+part of 'complete_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ConfirmModelAdapter extends TypeAdapter<ConfirmModel> {
+class CompleteModelAdapter extends TypeAdapter<CompleteModel> {
   @override
   final int typeId = 2;
 
   @override
-  ConfirmModel read(BinaryReader reader) {
+  CompleteModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return ConfirmModel(
+    return CompleteModel(
       destination: fields[0] as String?,
-      wayofTravel: fields[1] as String,
-      budget: fields[2] as int,
-      date: fields[3] as String,
-      totalDay: fields[4] as String,
-      image: fields[5] as dynamic,
+      extraDay: fields[1] as String,
+      extraMoney: fields[2] as int,
+      image: fields[3] as dynamic,
     );
   }
 
   @override
-  void write(BinaryWriter writer, ConfirmModel obj) {
+  void write(BinaryWriter writer, CompleteModel obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.destination)
       ..writeByte(1)
-      ..write(obj.wayofTravel)
+      ..write(obj.extraDay)
       ..writeByte(2)
-      ..write(obj.budget)
+      ..write(obj.extraMoney)
       ..writeByte(3)
-      ..write(obj.date)
-      ..writeByte(4)
-      ..write(obj.totalDay)
-      ..writeByte(5)
       ..write(obj.image);
   }
 
@@ -50,7 +44,7 @@ class ConfirmModelAdapter extends TypeAdapter<ConfirmModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ConfirmModelAdapter &&
+      other is CompleteModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:travel_app/model/complete_model/complete_model.dart';
 import 'package:travel_app/model/tripmodel/trip_model.dart';
 
 class TripOperations {
@@ -6,6 +7,11 @@ class TripOperations {
   static Future<void> addTrip(TripModel trip) async {
     final tripBox = await Hive.openBox<TripModel>('tripBox');
     await tripBox.add(trip);
+  }
+
+    static Future<void> completeTrip(CompleteModel tripDone) async {
+    final completeBox = await Hive.openBox<CompleteModel>('completeBox');
+    await completeBox.add(tripDone);
   }
 
   static Future<void> deleteTrip(int index) async {

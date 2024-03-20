@@ -1,27 +1,31 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:travel_app/model/complete_model/complete_model.dart';
 import 'package:travel_app/view/subscreens/confirm_head.dart';
 import 'package:travel_app/view/widgets/bottom_bar.dart';
 
 class ConfirmScreen extends StatelessWidget {
-  const ConfirmScreen({super.key});
+  const ConfirmScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color.fromRGBO(221, 249, 247, 1),
+    return Scaffold(
+      backgroundColor: const Color.fromRGBO(221, 249, 247, 1),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 44,
               ),
-              ConfirmHead(),
-              SizedBox(
+              const ConfirmHead(),
+              const SizedBox(
                 height: 32,
               ),
-              Row(
+              const Row(
                 children: [
                   Text(
                     "You",
@@ -42,21 +46,86 @@ class ConfirmScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
-              Text(
+              const Text(
                 "“A journey of a thousand miles begins with a single step, There is a world elsewhere”",
                 style: TextStyle(fontSize: 16),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
+              ),
+              FutureBuilder(
+                future: Hive.openBox<CompleteModel>('completeBox'),
+                builder: (context, AsyncSnapshot<Box<CompleteModel>> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else {
+                      final completeBox = snapshot.data!;
+                      final completeTrips = completeBox.values.toList();
+
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: completeTrips.length,
+                        itemBuilder: (context, index) {
+                          final trip = completeTrips[index];
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: 100,
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 143, 235, 206),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      width: 80,
+                                      height: 80,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        image: trip.image.isNotEmpty
+                                            ? DecorationImage(
+                                                image:
+                                                    FileImage(File(trip.image)),
+                                                fit: BoxFit.cover,
+                                              )
+                                            : null,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Center(
+                                      child: ListTile(
+                                        onTap: () {},
+                                        title: Text(trip.destination!),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    }
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                },
               ),
             ],
           ),
         ),
       ),
-      bottomNavigationBar: CircularBottomBar(),
+      bottomNavigationBar: const CircularBottomBar(),
     );
   }
 }

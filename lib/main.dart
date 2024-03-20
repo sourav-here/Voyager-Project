@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:travel_app/model/confirm_model/confirm_model.dart';
+import 'package:travel_app/model/complete_model/complete_model.dart';
 import 'package:travel_app/model/tripmodel/trip_model.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:travel_app/view/screens/login/welcome_screen.dart';
@@ -11,12 +11,12 @@ Future<void> main() async {
   if (!Hive.isAdapterRegistered(TripModelAdapter().typeId)) {
     Hive.registerAdapter(TripModelAdapter());
   }
-  if (!Hive.isAdapterRegistered(ConfirmModelAdapter().typeId)) {
-    Hive.registerAdapter(ConfirmModelAdapter());
+  if (!Hive.isAdapterRegistered(CompleteModelAdapter().typeId)) {
+    Hive.registerAdapter(CompleteModelAdapter());
   }
 
   Hive.openBox<TripModel>('tripDb');
-  Hive.openBox<ConfirmModel>('confirmDb');
+  Hive.openBox<CompleteModel>('completeDb');
   runApp(const MyApp());
 }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget buildTextWidget(String text) {
+Widget detailTextWidget(String text) {
   return Center(
     child: SizedBox(
       height: 50,
