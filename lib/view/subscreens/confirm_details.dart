@@ -179,6 +179,7 @@ import 'package:flutter/material.dart';
 import 'package:travel_app/functions/functions.dart';
 import 'package:travel_app/model/complete_model/complete_model.dart';
 import 'package:travel_app/view/screens/add_screen.dart';
+import 'package:travel_app/view/screens/confirm_screen.dart';
 import 'package:travel_app/view/subscreens/add_form.dart';
 
 class CompleteDetails extends StatefulWidget {
@@ -339,7 +340,10 @@ class _CompleteDetailState extends State<CompleteDetails> {
               actions: [
                 TextButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ConfirmScreen()));
                     },
                     child: const Text('Yeah'))
               ],

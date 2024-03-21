@@ -31,7 +31,8 @@ class _AddPageState extends State<AddPage> {
   @override
   void initState() {
     super.initState();
-    destinationController = TextEditingController(text: widget.initialDestination);
+    destinationController =
+        TextEditingController(text: widget.initialDestination);
     travellingController = TextEditingController();
     budgetController = TextEditingController();
     startingDateController = TextEditingController();
@@ -195,7 +196,10 @@ class _AddPageState extends State<AddPage> {
                 const SizedBox(height: 10),
                 TextButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomeScreen()));
                   },
                   child: const Text(
                     "Go Home",
@@ -235,47 +239,28 @@ class _AddPageState extends State<AddPage> {
     setState(() {
       pickedImage = null;
     });
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const AddScreen()));
   }
 
-  // Future<void> addClicked() async {
-  //   final destination = destinationController.text.trim();
-  //   final wayofTravel = travellingController.text.trim();
-  //   final budget = budgetController.text.trim();
-  //   final date = startingDateController.text.trim();
-  //   final totalDay = daysController.text.trim();
-  //   final image = pickedImage != null ? pickedImage!.path : "";
-
-  //   final trip = TripModel(
-  //     destination: destination,
-  //     wayofTravel: wayofTravel,
-  //     budget: int.parse(budget),
-  //     date: int.parse(date),
-  //     totalDay: int.parse(totalDay),
-  //     image: image,
-  //   );
-
-  //   tripBox.add(trip);
-  //   clearText();
-  // }
-
   Future<void> addClicked() async {
-  final destination = destinationController.text.trim();
-  final wayofTravel = travellingController.text.trim();
-  final budget = budgetController.text.trim();
-  final date = startingDateController.text.trim();
-  final totalDay = daysController.text.trim();
-  final image = pickedImage != null ? pickedImage!.path : "";
+    final destination = destinationController.text.trim();
+    final wayofTravel = travellingController.text.trim();
+    final budget = budgetController.text.trim();
+    final date = startingDateController.text.trim();
+    final totalDay = daysController.text.trim();
+    final image = pickedImage != null ? pickedImage!.path : "";
 
-  final trip = TripModel(
-    destination: destination,
-    wayofTravel: wayofTravel,
-    budget: int.parse(budget),
-    date: int.parse(date),
-    totalDay: int.parse(totalDay),
-    image: image,
-  );
+    final trip = TripModel(
+      destination: destination,
+      wayofTravel: wayofTravel,
+      budget: int.parse(budget),
+      date: int.parse(date),
+      totalDay: int.parse(totalDay),
+      image: image,
+    );
 
-  await TripOperations.addTrip(trip);
-  clearText();
-}
+    await TripOperations.addTrip(trip);
+    clearText();
+  }
 }

@@ -1,40 +1,35 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:travel_app/view/screens/add_screen.dart';
-import 'package:travel_app/view/subscreens/confirm_details.dart';
+import 'package:travel_app/view/screens/confirm_screen.dart';
 import 'package:travel_app/view/subscreens/detail_text.dart';
 
-class DetailScreen extends StatefulWidget {
-  const DetailScreen(
+class CompletedDetails extends StatefulWidget {
+  const CompletedDetails(
       {Key? key,
       required this.destination,
-      required this.wayofTravel,
-      required this.budget,
-      this.date,
-      this.totalDay,
+      required this.extraDay,
+      required this.extraMoney,
       this.image});
 
   final String destination;
-  final String wayofTravel;
-  final String budget;
-  final String? date;
-  final String? totalDay;
+  final String extraDay;
+  final int extraMoney;
   final String? image;
 
   @override
-  State<DetailScreen> createState() => _DetailScreenState();
+  State<CompletedDetails> createState() => _DetailScreenState();
 }
 
-class _DetailScreenState extends State<DetailScreen> {
+class _DetailScreenState extends State<CompletedDetails> {
   File? selectedimage;
   String? destination;
-  String? budget;
+  int? extraMoney;
 
   @override
   void initState() {
     selectedimage = widget.image != '' ? File(widget.image!) : null;
     destination = widget.destination;
-    budget = widget.budget;
+    extraMoney = widget.extraMoney;
     super.initState();
   }
 
@@ -89,7 +84,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Trip Summary',
+                        'Additional Details',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -111,41 +106,30 @@ class _DetailScreenState extends State<DetailScreen> {
                         const SizedBox(
                           height: 20,
                         ),
-                        detailTextWidget('Destination: ${widget.destination}'),
                         const SizedBox(
                           height: 20,
                         ),
                         detailTextWidget(
-                            'Way of Travelling: ${widget.wayofTravel}'),
+                            'Extra Days :  ${widget.extraDay}'),
                         const SizedBox(
                           height: 20,
                         ),
-                        detailTextWidget('Budget: ${widget.budget}'),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        detailTextWidget("Month : ${widget.date}'th month"),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        detailTextWidget('Total Days: ${widget.totalDay}'),
+                        detailTextWidget('Extra Amount :  ${widget.extraMoney}'),
+                        
                       ],
                     ),
                   ),
                 ],
               ),
               const SizedBox(
-                height: 30,
+                height: 40,
               ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CompleteDetails(
-                        destination: widget.destination,
-                        image: widget.image!,
-                      ),
+                      builder: (context) => const ConfirmScreen()
                     ),
                   );
                 },
@@ -154,25 +138,8 @@ class _DetailScreenState extends State<DetailScreen> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   backgroundColor: const Color.fromARGB(255, 238, 139, 82),
                 ),
-                child: const Text("Completed", style: TextStyle(color: Colors.white)),
+                child: const Text("Go Back", style: TextStyle(color: Colors.white)),
               ),
-
-              const SizedBox(
-                height: 20,
-              ),
-              TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AddScreen(),
-                      ),
-                    );
-                  },
-                  child: const Text(
-                    "Go back",
-                    style: TextStyle(color: Colors.black, fontSize: 16),
-                  ))
             ],
           ),
         ),

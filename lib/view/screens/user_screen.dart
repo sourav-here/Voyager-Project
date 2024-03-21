@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:travel_app/model/complete_model/complete_model.dart';
-import 'package:travel_app/model/tripmodel/trip_model.dart';
-// import 'package:hive/hive.dart';
-// import 'package:travel_app/model/tripmodel/trip_model.dart';
 import 'package:travel_app/view/screens/login/signup_screen.dart';
 import 'package:travel_app/view/subscreens/about.dart';
 import 'package:travel_app/view/subscreens/chart_screen.dart';
@@ -46,7 +41,7 @@ class _UserScreenState extends State<UserScreen> {
                         MaterialPageRoute(
                             builder: (context) => const AboutPage()));
                   }),
-              const SizedBox(height: 10),
+              const SizedBox(height: 15),
               UserTile(
                   icon: const Icon(Icons.private_connectivity_outlined),
                   text: 'Privacy & Policy',
@@ -56,14 +51,19 @@ class _UserScreenState extends State<UserScreen> {
                         MaterialPageRoute(
                             builder: (context) => const PrivacyPage()));
                   }),
-              const SizedBox(height: 10),
+              const SizedBox(height: 15),
               UserTile(
                   icon: const Icon(Icons.bar_chart_rounded),
                   text: 'Chart',
                   onpressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const ChartPage(trips: [],)));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ChartPage(
+                                  trips: [],
+                                )));
                   }),
-              const SizedBox(height: 10),
+              const SizedBox(height: 15),
               UserTile(
                   icon: const Icon(Icons.my_library_books_outlined),
                   text: 'Journal',
@@ -73,45 +73,12 @@ class _UserScreenState extends State<UserScreen> {
                         MaterialPageRoute(
                             builder: (context) => const JournalPage()));
                   }),
-              const SizedBox(height: 10),
-              // UserTile(
-              //     icon: const Icon(Icons.settings_backup_restore_rounded),
-              //     text: 'Reset App',
-              //     onpressed: () {
-              //       resetDialogue();
-              //     }),
-              const SizedBox(height: 10),
+              const SizedBox(height: 15),
               UserTile(
                   icon: const Icon(Icons.exit_to_app_rounded),
                   text: 'Log Out',
                   onpressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: const Text('Log Out'),
-                        content: const Text('Are you sure about this?'),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text('Cancel'),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) => const SignUp()),
-                                  (route) => false);
-                            },
-                            child: const Text('Go on'),
-                          ),
-                        ],
-                      ),
-                    );
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => const SignUp()),
-                        (route) => false);
+                    logoutDialogue();
                   }),
             ],
           ),
@@ -121,33 +88,29 @@ class _UserScreenState extends State<UserScreen> {
     );
   }
 
-//   void reset() {
-//   showDialog(
-//     context: context,
-//     useSafeArea: true,
-//     builder: (context) => AlertDialog(
-//       scrollable: true,
-//       content: const Text('Reset the app'),
-//       actions: [
-//         TextButton(
-//           onPressed: () {
-//             setState(() {
-//               Hive.box<TripModel>('tripDb').clear();
-//               Hive.box<CompleteModel>('completeDb').clear();
-//             });
-//             Navigator.pop(context);
-//           },
-//           child: const Text('OK', style: TextStyle(color: Colors.red)),
-//         ),
-//         TextButton(
-//           onPressed: () {
-//             Navigator.pop(context);
-//           },
-//           child: const Text('Cancel', style: TextStyle(color: Colors.black)),
-//         ),
-//       ],
-//     ),
-//   );
-// }
-
+  void logoutDialogue() {
+    showDialog(
+        context: context,
+        useSafeArea: true,
+        builder: (context) => AlertDialog(
+              title: const Text('Log Out'),
+              content: const Text('Are you sure about this?'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (context) => const SignUp()),
+                        (route) => false);
+                  },
+                  child: const Text('Go on'),
+                ),
+              ],
+            ));
+  }
 }

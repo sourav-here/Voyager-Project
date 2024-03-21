@@ -20,6 +20,7 @@ class JournalPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(height: 50,),
                 Text(
                   'Travel Journal',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),

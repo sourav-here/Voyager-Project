@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:travel_app/model/complete_model/complete_model.dart';
+import 'package:travel_app/view/subscreens/completed_details.dart';
 import 'package:travel_app/view/subscreens/confirm_head.dart';
 import 'package:travel_app/view/widgets/bottom_bar.dart';
 
@@ -35,7 +36,7 @@ class ConfirmScreen extends StatelessWidget {
                     width: 12,
                   ),
                   Text(
-                    "Ready?",
+                    "Did it !!!",
                     style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
@@ -104,8 +105,22 @@ class ConfirmScreen extends StatelessWidget {
                                   Expanded(
                                     child: Center(
                                       child: ListTile(
-                                        onTap: () {},
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      CompletedDetails(
+                                                          destination:'',
+                                                          extraDay:trip.extraDay,
+                                                          extraMoney: trip.extraMoney,
+                                                          image: trip.image,)
+                                                        )
+                                                      );
+                                        },
                                         title: Text(trip.destination!),
+                                        trailing:
+                                            const Icon(Icons.done_all_rounded),
                                       ),
                                     ),
                                   ),
