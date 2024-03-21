@@ -7,12 +7,14 @@ class AddPageForm extends StatelessWidget {
     this.controller,
     this.suffixIcon,
     this.validator,
+    this.keyboardtype
   }) : super(key: key);
 
   final String hintText;
   final TextEditingController? controller;
   final IconData? suffixIcon;
   final String? Function(String?)? validator;
+  final TextInputType? keyboardtype;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +38,7 @@ class AddPageForm extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: TextFormField(
+            keyboardType: keyboardtype,
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: hintText,

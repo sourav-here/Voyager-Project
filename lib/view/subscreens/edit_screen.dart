@@ -114,6 +114,7 @@ class _AddPageState extends State<EditPage> {
                 AddPageForm(
                     hintText: "Destination",
                     controller: destinationController,
+                    keyboardtype: TextInputType.name,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'this is required';
@@ -124,6 +125,7 @@ class _AddPageState extends State<EditPage> {
                 AddPageForm(
                     hintText: "Way of Travelling",
                     controller: travellingController,
+                    keyboardtype: TextInputType.name,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'this is required';
@@ -134,6 +136,7 @@ class _AddPageState extends State<EditPage> {
                 AddPageForm(
                     hintText: "Budget",
                     controller: budgetController,
+                    keyboardtype: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'this is required';
@@ -142,9 +145,10 @@ class _AddPageState extends State<EditPage> {
                       }
                     }),
                 AddPageForm(
-                    hintText: "Starting date",
+                    hintText: "Month",
                     suffixIcon: Icons.calendar_month_outlined,
                     controller: startingDateController,
+                    keyboardtype: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'this is required';
@@ -155,6 +159,7 @@ class _AddPageState extends State<EditPage> {
                 AddPageForm(
                     hintText: "Total days",
                     controller: daysController,
+                    keyboardtype: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'this is required';

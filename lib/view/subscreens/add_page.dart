@@ -101,6 +101,7 @@ class _AddPageState extends State<AddPage> {
                 AddPageForm(
                     hintText: "Destination",
                     controller: destinationController,
+                    keyboardtype: TextInputType.name,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'this is required';
@@ -111,6 +112,7 @@ class _AddPageState extends State<AddPage> {
                 AddPageForm(
                     hintText: "Way of Travelling",
                     controller: travellingController,
+                    keyboardtype: TextInputType.name,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'this is required';
@@ -121,6 +123,7 @@ class _AddPageState extends State<AddPage> {
                 AddPageForm(
                     hintText: "Budget",
                     controller: budgetController,
+                    keyboardtype: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'this is required';
@@ -131,6 +134,7 @@ class _AddPageState extends State<AddPage> {
                 AddPageForm(
                     hintText: "Month",
                     controller: startingDateController,
+                    keyboardtype: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'this is required';
@@ -141,6 +145,7 @@ class _AddPageState extends State<AddPage> {
                 AddPageForm(
                     hintText: "Total days",
                     controller: daysController,
+                    keyboardtype: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'this is required';
