@@ -5,6 +5,7 @@ import 'package:travel_app/model/tripmodel/trip_model.dart';
 import 'package:travel_app/view/screens/details_screen.dart';
 import 'package:travel_app/view/subscreens/add_head.dart';
 import 'package:travel_app/view/subscreens/add_page.dart';
+import 'package:travel_app/view/subscreens/chart_screen.dart';
 import 'package:travel_app/view/subscreens/edit_screen.dart';
 import 'package:travel_app/view/widgets/bottom_bar.dart';
 import 'package:travel_app/view/widgets/search.dart';
@@ -19,6 +20,7 @@ class AddScreen extends StatefulWidget {
 class _AddScreenState extends State<AddScreen> {
   List<TripModel> trips = [];
   List<TripModel> filteredTrips = [];
+  List<int> tripSum = [];
 
   @override
   void initState() {
@@ -84,6 +86,9 @@ class _AddScreenState extends State<AddScreen> {
                 itemCount: filteredTrips.length,
                 itemBuilder: (context, index) {
                   final trip = filteredTrips[index];
+                  tripSum.add(trip.budget);
+                  double totalTrip = tripSum.reduce((value, element) => value + element).toDouble();
+                  TripData.totalValue = totalTrip;
                   return Container(
                     height: 100,
                     margin: const EdgeInsets.all(10.0),

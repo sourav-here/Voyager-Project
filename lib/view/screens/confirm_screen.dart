@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:travel_app/model/complete_model/complete_model.dart';
+import 'package:travel_app/view/subscreens/chart_screen.dart';
 import 'package:travel_app/view/subscreens/completed_details.dart';
 import 'package:travel_app/view/subscreens/confirm_head.dart';
 import 'package:travel_app/view/widgets/bottom_bar.dart';
@@ -66,13 +67,17 @@ class ConfirmScreen extends StatelessWidget {
                     } else {
                       final completeBox = snapshot.data!;
                       final completeTrips = completeBox.values.toList();
+                      List <int> completeSum = [];
 
                       return ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: completeTrips.length,
                         itemBuilder: (context, index) {
-                          final trip = completeTrips[index];
+                          final complteTrip = completeTrips[index];
+                          completeSum.add(complteTrip.extraMoney);
+                          double totalExpenses = completeSum.reduce((value, element) => value + element).toDouble();
+                          TripData.totalExpense = totalExpenses;
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
@@ -92,10 +97,10 @@ class ConfirmScreen extends StatelessWidget {
                                         shape: BoxShape.rectangle,
                                         borderRadius:
                                             BorderRadius.circular(10.0),
-                                        image: trip.image.isNotEmpty
+                                        image: complteTrip.image.isNotEmpty
                                             ? DecorationImage(
                                                 image:
-                                                    FileImage(File(trip.image)),
+                                                    FileImage(File(complteTrip.image)),
                                                 fit: BoxFit.cover,
                                               )
                                             : null,
@@ -112,13 +117,13 @@ class ConfirmScreen extends StatelessWidget {
                                                   builder: (context) =>
                                                       CompletedDetails(
                                                           destination:'',
-                                                          extraDay:trip.extraDay,
-                                                          extraMoney: trip.extraMoney,
-                                                          image: trip.image,)
+                                                          extraDay:complteTrip.extraDay,
+                                                          extraMoney: complteTrip.extraMoney,
+                                                          image: complteTrip.image,)
                                                         )
                                                       );
                                         },
-                                        title: Text(trip.destination!),
+                                        title: Text(complteTrip.destination!),
                                         trailing:
                                             const Icon(Icons.done_all_rounded),
                                       ),

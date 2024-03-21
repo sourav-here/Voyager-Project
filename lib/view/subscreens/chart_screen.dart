@@ -1,72 +1,88 @@
 import 'package:flutter/material.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:travel_app/model/tripmodel/trip_model.dart';
+import 'package:pie_chart/pie_chart.dart';
 
-class ChartPage extends StatelessWidget {
-  final List<TripModel> trips;
+class ChartScreen extends StatefulWidget {
+  const ChartScreen({Key? key});
 
-  const ChartPage({Key? key, required this.trips}) : super(key: key);
+  @override
+  State<ChartScreen> createState() => _ChartScreenState();
+}
+
+class _ChartScreenState extends State<ChartScreen> {
+  late double totalTripValue;
+  late double totalExpenseValue;
+
+  late Map<String, double> details;
+
+  @override
+  void initState() {
+    super.initState();
+    addtoPieChart();
+  }
+
+  void addtoPieChart() {
+    setState(() {
+      totalTripValue = TripData.totalValue;
+      totalExpenseValue = TripData.totalExpense;
+      details = {
+        'Budget': totalTripValue,
+        'Additional Expense': totalExpenseValue,
+      };
+    });
+  }
+
+  List<Color> listColors = [const Color.fromARGB(255, 235, 239, 96), const Color.fromARGB(255, 162, 224, 75)];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Pie Chart'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Total Budget and Total Days for All Trips',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: charts.PieChart(
-                _createChartData(),
-                animate: true,
-                defaultRenderer: charts.ArcRendererConfig(
-                  arcWidth: 60,
-                  arcRendererDecorators: [
-                    charts.ArcLabelDecorator(
-                      labelPosition: charts.ArcLabelPosition.auto,
-                    )
-                  ],
+    return Stack(
+      children: [
+        Image.asset(
+          'assets/images/bg.png',
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          fit: BoxFit.cover,
+        ),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Column(
+            children: [
+              const SizedBox(height: 90),
+              const Text(
+                'Money Status',
+                style: TextStyle(fontSize: 28, color: Colors.white,fontWeight: FontWeight.w900),
+              ),
+              const SizedBox(height: 170),
+              Center(
+                child: PieChart(
+                  animationDuration: const Duration(seconds: 5),
+                  dataMap: details,
+                  colorList: listColors,
+                  chartType: ChartType.ring,
+                  ringStrokeWidth: 20,
+                  chartLegendSpacing: 50,
+                  chartRadius: MediaQuery.of(context).size.width / 2,
+                  chartValuesOptions: const ChartValuesOptions(
+                    showChartValues: true,
+                    showChartValueBackground: true,
+                    showChartValuesOutside: true,
+                  ),
+                  legendOptions: const LegendOptions(
+                    showLegendsInRow: false,
+                    legendPosition: LegendPosition.bottom,
+                    legendShape: BoxShape.circle,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
+      ],
     );
-  }
-
-  List<charts.Series<TripData, String>> _createChartData() {
-    final totalBudget = trips.map((trip) => trip.budget).fold(0, (a, b) => a + b);
-    final totalDays = trips.map((trip) => trip.totalDay).fold(0, (a, b) => a + b);
-
-    final data = [
-      TripData('Total Budget', totalBudget.toDouble()),
-      TripData('Total Days', totalDays.toDouble()),
-    ];
-
-    return [
-      charts.Series<TripData, String>(
-        id: 'TripData',
-        domainFn: (TripData trip, _) => trip.title,
-        measureFn: (TripData trip, _) => trip.value,
-        data: data,
-        labelAccessorFn: (TripData trip, _) => '${trip.title}: ${trip.value}',
-      )
-    ];
   }
 }
 
 class TripData {
-  final String title;
-  final double value;
-
-  TripData(this.title, this.value);
+  static double totalValue = 0;
+  static double totalExpense = 0;
 }
-

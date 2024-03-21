@@ -59,9 +59,7 @@ class _UserScreenState extends State<UserScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ChartPage(
-                                  trips: [],
-                                )));
+                            builder: (context) => const ChartScreen()));
                   }),
               const SizedBox(height: 15),
               UserTile(

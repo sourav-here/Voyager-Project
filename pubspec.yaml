@@ -20,6 +20,7 @@ dependencies:
   image_picker: ^1.0.7
   intl:
   charts_flutter:
+  pie_chart: ^5.4.0
 
 flutter_launcher_icons:
   android: "launcher_icon"
