@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:travel_app/view/screens/login/signup_screen.dart';
+import 'package:travel_app/view/screens/home_screen.dart';
+import 'package:travel_app/view/screens/login/login_screen.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -36,13 +37,13 @@ class SplashScreenState extends State<SplashScreen> {
          if (isLoggedIn) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const SignUp()),
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
           );
         }
       } else {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const SignUp()),
+          MaterialPageRoute(builder: (context) => const LogIn()),
         );
       }
     });

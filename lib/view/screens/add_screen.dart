@@ -212,7 +212,7 @@ class _AddScreenState extends State<AddScreen> {
   Future<void> fetchTrips() async {
     final fetchedTrips = await TripOperations.fetchTrips();
     setState(() {
-      trips = fetchedTrips;
+      trips = fetchedTrips.reversed.toList();
       filteredTrips = trips;
     });
   }

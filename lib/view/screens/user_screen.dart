@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/view/screens/login/signup_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travel_app/view/screens/login/welcome_screen.dart';
 import 'package:travel_app/view/subscreens/about.dart';
 import 'package:travel_app/view/subscreens/chart_screen.dart';
 import 'package:travel_app/view/subscreens/journal.dart';
@@ -102,13 +103,23 @@ class _UserScreenState extends State<UserScreen> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => const SignUp()),
-                        (route) => false);
+                    handleLogout(context);
                   },
                   child: const Text('Go on'),
                 ),
               ],
             ));
+  }
+
+  void handleLogout(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('username');
+    prefs.remove('password');
+
+    // ignore: use_build_context_synchronously
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+    );
   }
 }

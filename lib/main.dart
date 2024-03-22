@@ -3,7 +3,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:travel_app/model/complete_model/complete_model.dart';
 import 'package:travel_app/model/tripmodel/trip_model.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:travel_app/view/screens/login/welcome_screen.dart';
+import 'package:travel_app/view/screens/login/splash.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Travel App",
       theme: ThemeData(fontFamily: GoogleFonts.lato().fontFamily),
-      home: const WelcomeScreen(),
+      home: const SplashScreen(),
     );
   }
 }
