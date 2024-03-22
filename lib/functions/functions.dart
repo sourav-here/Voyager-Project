@@ -28,7 +28,7 @@ class TripOperations {
   static Future<List<TripModel>> fetchTrips() async {
     final tripBox = await Hive.openBox<TripModel>('tripBox');
     final trips = tripBox.values.toList();
-    return trips.reversed.toList();
+    return trips.toList();
   }
 
   static List<TripModel> searchTrips(List<TripModel> trips, String searchText) {

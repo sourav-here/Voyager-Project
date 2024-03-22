@@ -33,7 +33,7 @@ class SplashScreenState extends State<SplashScreen> {
     var isLoggedIn = shared.getBool(KEY);
 
     Future.delayed(const Duration(milliseconds: 1), () {
-      if (isLoggedIn != null && isLoggedIn) {
+      if (isLoggedIn != null) {
          if (isLoggedIn) {
           Navigator.pushReplacement(
             context,

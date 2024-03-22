@@ -71,10 +71,15 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image(
-                        image: FileImage(File(widget.image!)),
-                        fit: BoxFit.cover,
-                      ),
+                      child: widget.image != null
+                          ? Image(
+                              image: FileImage(File(widget.image!)),
+                              fit: BoxFit.cover,
+                            )
+                          : Image.asset(
+                              'assets/images/form.jpg',
+                              fit: BoxFit.cover,
+                            ),
                     ),
                   ),
                 ),
@@ -150,13 +155,15 @@ class _DetailScreenState extends State<DetailScreen> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  textStyle: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.w500),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
                   backgroundColor: const Color.fromARGB(255, 238, 139, 82),
                 ),
-                child: const Text("Completed", style: TextStyle(color: Colors.white)),
+                child: const Text("Completed",
+                    style: TextStyle(color: Colors.white)),
               ),
-
               const SizedBox(
                 height: 20,
               ),
