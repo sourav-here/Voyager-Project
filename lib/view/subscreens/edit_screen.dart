@@ -145,8 +145,8 @@ class _AddPageState extends State<EditPage> {
                       }
                     }),
                 AddPageForm(
-                    hintText: "Month",
-                    suffixIcon: Icons.calendar_month_outlined,
+                    hintText: "Year",
+                    suffixIcon: Icons.keyboard_arrow_down_rounded,
                     controller: startingDateController,
                     keyboardtype: TextInputType.number,
                     validator: (value) {

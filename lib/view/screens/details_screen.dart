@@ -124,7 +124,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         const SizedBox(
                           height: 20,
                         ),
-                        detailTextWidget("Month : ${widget.date}'th month"),
+                        detailTextWidget("Year : ${widget.date}"),
                         const SizedBox(
                           height: 20,
                         ),

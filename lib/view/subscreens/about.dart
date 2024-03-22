@@ -8,7 +8,7 @@ class AboutPage extends StatelessWidget {
     return  Stack(
       children: [
         Image.asset(
-          'assets/images/bg.png',
+          'assets/images/ba.jpg',
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           fit: BoxFit.cover,

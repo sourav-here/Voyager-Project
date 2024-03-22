@@ -85,9 +85,11 @@ class _AddScreenState extends State<AddScreen> {
               child: ListView.builder(
                 itemCount: filteredTrips.length,
                 itemBuilder: (context, index) {
-                  final trip = filteredTrips[index];
+                  final trip = filteredTrips.reversed.toList()[index];
                   tripSum.add(trip.budget);
-                  double totalTrip = tripSum.reduce((value, element) => value + element).toDouble();
+                  double totalTrip = tripSum
+                      .reduce((value, element) => value + element)
+                      .toDouble();
                   TripData.totalValue = totalTrip;
                   return Container(
                     height: 100,
@@ -101,18 +103,19 @@ class _AddScreenState extends State<AddScreen> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
-                            width: 80, 
-                            height: 80, 
+                            width: 80,
+                            height: 80,
                             decoration: BoxDecoration(
                               shape: BoxShape.rectangle,
-                              borderRadius: BorderRadius.circular(
-                                  10.0), 
+                              borderRadius: BorderRadius.circular(10.0),
                               image: trip.image.isNotEmpty
                                   ? DecorationImage(
                                       image: FileImage(File(trip.image)),
                                       fit: BoxFit.cover,
                                     )
-                                  : null,
+                                  : const DecorationImage(
+                                      image: AssetImage('assets/images/mountain.png'),
+                                      fit: BoxFit.cover),
                             ),
                           ),
                         ),

@@ -66,8 +66,9 @@ class ConfirmScreen extends StatelessWidget {
                       return Text('Error: ${snapshot.error}');
                     } else {
                       final completeBox = snapshot.data!;
-                      final completeTrips = completeBox.values.toList();
-                      List <int> completeSum = [];
+                      final completeTrips =
+                          completeBox.values.toList().reversed.toList();
+                      List<int> completeSum = [];
 
                       return ListView.builder(
                         shrinkWrap: true,
@@ -76,7 +77,9 @@ class ConfirmScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final complteTrip = completeTrips[index];
                           completeSum.add(complteTrip.extraMoney);
-                          double totalExpenses = completeSum.reduce((value, element) => value + element).toDouble();
+                          double totalExpenses = completeSum
+                              .reduce((value, element) => value + element)
+                              .toDouble();
                           TripData.totalExpense = totalExpenses;
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -99,11 +102,14 @@ class ConfirmScreen extends StatelessWidget {
                                             BorderRadius.circular(10.0),
                                         image: complteTrip.image.isNotEmpty
                                             ? DecorationImage(
-                                                image:
-                                                    FileImage(File(complteTrip.image)),
+                                                image: FileImage(
+                                                    File(complteTrip.image)),
                                                 fit: BoxFit.cover,
                                               )
-                                            : null,
+                                            : const DecorationImage(
+                                                image: AssetImage(
+                                                    'assets/images/mountain.png'),
+                                                fit: BoxFit.cover),
                                       ),
                                     ),
                                   ),
@@ -116,12 +122,14 @@ class ConfirmScreen extends StatelessWidget {
                                               MaterialPageRoute(
                                                   builder: (context) =>
                                                       CompletedDetails(
-                                                          destination:'',
-                                                          extraDay:complteTrip.extraDay,
-                                                          extraMoney: complteTrip.extraMoney,
-                                                          image: complteTrip.image,)
-                                                        )
-                                                      );
+                                                        destination: '',
+                                                        extraDay: complteTrip
+                                                            .extraDay,
+                                                        extraMoney: complteTrip
+                                                            .extraMoney,
+                                                        image:
+                                                            complteTrip.image,
+                                                      )));
                                         },
                                         title: Text(complteTrip.destination!),
                                         trailing:

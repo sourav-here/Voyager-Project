@@ -132,8 +132,9 @@ class _AddPageState extends State<AddPage> {
                       }
                     }),
                 AddPageForm(
-                    hintText: "Month",
+                    hintText: "Year",
                     controller: startingDateController,
+                    suffixIcon: Icons.keyboard_arrow_down_rounded,
                     keyboardtype: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
