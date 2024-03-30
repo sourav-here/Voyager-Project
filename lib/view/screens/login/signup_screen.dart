@@ -3,20 +3,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_app/view/screens/login/login_screen.dart';
 import 'package:travel_app/view/screens/login/splash.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+class SignUp extends StatelessWidget {
+   SignUp({Key? key}) : super(key: key);
 
-  @override
-  State<SignUp> createState() => _SignUpState();
-}
-
-class _SignUpState extends State<SignUp> {
   final _formkey = GlobalKey<FormState>();
 
   final usernamecontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
 
-  Future<void> signup() async {
+  Future<void> signup(BuildContext context) async {
     String username = usernamecontroller.text;
     String password = passwordcontroller.text;
 
@@ -26,11 +21,10 @@ class _SignUpState extends State<SignUp> {
       shared.setString('password', password);
       shared.setBool(SplashScreenState.KEY, true);
 
-      // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const LogIn(),
+          builder: (context) =>  LogIn(),
         ),
       );
     } else {
@@ -126,7 +120,7 @@ class _SignUpState extends State<SignUp> {
                       child: ElevatedButton(
                         onPressed: () {
                           if (_formkey.currentState!.validate()) {
-                            signup();
+                            signup(context);
                           }
                         },
                         style: TextButton.styleFrom(
@@ -153,7 +147,7 @@ class _SignUpState extends State<SignUp> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const LogIn(),
+                              builder: (context) =>  LogIn(),
                             ),
                           );
                         },

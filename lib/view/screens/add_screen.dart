@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:travel_app/functions/functions.dart';
@@ -30,6 +31,7 @@ class _AddScreenState extends State<AddScreen> {
 
   @override
   Widget build(BuildContext context) {
+    log('message');
     return Scaffold(
       backgroundColor: const Color.fromRGBO(221, 249, 247, 1),
       floatingActionButton: FloatingActionButton(
@@ -159,6 +161,7 @@ class _AddScreenState extends State<AddScreen> {
                                   date: trip.date.toString(),
                                   totalDay: trip.totalDay.toString(),
                                   imagepath: trip.image,
+                                  index: index,
                                 ),
                               ),
                             );

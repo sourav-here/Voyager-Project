@@ -1,22 +1,25 @@
-import 'dart:io';
 
+
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:travel_app/controller/edit_provider.dart';
+import 'package:travel_app/functions/functions.dart';
 import 'package:travel_app/model/tripmodel/trip_model.dart';
 import 'package:travel_app/view/screens/add_screen.dart';
 import 'package:travel_app/view/subscreens/add_form.dart';
 
 class EditPage extends StatefulWidget {
   const EditPage({
-    super.key,
+    Key? key,
     required this.destination,
     required this.wayofTravel,
     required this.budget,
     required this.date,
     required this.totalDay,
     required this.imagepath,
-  });
+    required this.index,
+  }) : super(key: key);
 
   final dynamic destination;
   final dynamic wayofTravel;
@@ -24,41 +27,35 @@ class EditPage extends StatefulWidget {
   final dynamic date;
   final dynamic totalDay;
   final dynamic imagepath;
+  final int index; 
 
   @override
-  State<EditPage> createState() => _AddPageState();
+  State<EditPage> createState() => _EditPageState();
 }
 
-class _AddPageState extends State<EditPage> {
-  final _formkey = GlobalKey<FormState>();
-  late final TextEditingController destinationController;
-  late final TextEditingController travellingController;
-  late final TextEditingController budgetController;
-  late final TextEditingController startingDateController;
-  late final TextEditingController daysController;
-  File? pickedImage;
-  late Box<TripModel> tripBox;
+class _EditPageState extends State<EditPage> {
+  final GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    if (widget.imagepath != null && widget.imagepath.isNotEmpty) {
-      pickedImage = File(widget.imagepath);
-    }
-    destinationController = TextEditingController(text: widget.destination);
-    travellingController = TextEditingController(text: widget.wayofTravel);
-    budgetController = TextEditingController(text: widget.budget);
-    startingDateController = TextEditingController(text: widget.date);
-    daysController = TextEditingController(text: widget.totalDay);
-    tripBox = Hive.box<TripModel>('tripBox');
+    final editProvider = Provider.of<EditProvider>(context, listen: false);
+    editProvider.destinationController.text = widget.destination.toString();
+    editProvider.travellingController.text = widget.wayofTravel.toString();
+    editProvider.budgetController.text = widget.budget.toString();
+    editProvider.startingDateController.text = widget.date.toString();
+    editProvider.daysController.text = widget.totalDay.toString();
+    editProvider.pickedImage =
+        widget.imagepath != '' ? File(widget.imagepath.toString()) : null;
   }
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<EditProvider>(context);
     return Scaffold(
       backgroundColor: const Color.fromRGBO(221, 249, 247, 1),
       body: Form(
-        key: _formkey,
+        key: formkey,
         child: SingleChildScrollView(
           child: Container(
             color: const Color.fromRGBO(221, 249, 247, 1),
@@ -69,14 +66,14 @@ class _AddPageState extends State<EditPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 140),
                   width: double.infinity,
                   height: 130,
-                  child: pickedImage != null
+                  child: provider.pickedImage != null
                       ? Container(
                           width: 150,
                           height: 120,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(25),
                             image: DecorationImage(
-                              image: FileImage(pickedImage!),
+                              image: FileImage(provider.pickedImage!),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -96,7 +93,7 @@ class _AddPageState extends State<EditPage> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    pickImageFromGallery();
+                    provider.pickImageFromGallery();
                   },
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(
@@ -113,7 +110,7 @@ class _AddPageState extends State<EditPage> {
                 const SizedBox(height: 10),
                 AddPageForm(
                     hintText: "Destination",
-                    controller: destinationController,
+                    controller: provider.destinationController,
                     keyboardtype: TextInputType.name,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -124,7 +121,7 @@ class _AddPageState extends State<EditPage> {
                     }),
                 AddPageForm(
                     hintText: "Way of Travelling",
-                    controller: travellingController,
+                    controller: provider.travellingController,
                     keyboardtype: TextInputType.name,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -135,7 +132,7 @@ class _AddPageState extends State<EditPage> {
                     }),
                 AddPageForm(
                     hintText: "Budget",
-                    controller: budgetController,
+                    controller: provider.budgetController,
                     keyboardtype: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -147,7 +144,7 @@ class _AddPageState extends State<EditPage> {
                 AddPageForm(
                     hintText: "Year",
                     suffixIcon: Icons.keyboard_arrow_down_rounded,
-                    controller: startingDateController,
+                    controller: provider.startingDateController,
                     keyboardtype: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -158,7 +155,7 @@ class _AddPageState extends State<EditPage> {
                     }),
                 AddPageForm(
                     hintText: "Total days",
-                    controller: daysController,
+                    controller: provider.daysController,
                     keyboardtype: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -173,12 +170,8 @@ class _AddPageState extends State<EditPage> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        if (_formkey.currentState!.validate()) {
-                          addClicked();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const AddScreen()));
+                        if (formkey.currentState!.validate()) {
+                          addClicked(widget.index);
                         }
                       },
                       style: TextButton.styleFrom(
@@ -236,37 +229,14 @@ class _AddPageState extends State<EditPage> {
     );
   }
 
-  Future pickImageFromGallery() async {
-    final returnImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-
-    if (returnImage == null) {
-      return;
-    }
-
-    setState(() {
-      pickedImage = File(returnImage.path);
-    });
-  }
-
-  void clearText() {
-    destinationController.clear();
-    travellingController.clear();
-    budgetController.clear();
-    startingDateController.clear();
-    daysController.clear();
-    setState(() {
-      pickedImage = null;
-    });
-  }
-
-  Future<void> addClicked() async {
-    final destination = destinationController.text.trim();
-    final wayofTravel = travellingController.text.trim();
-    final budget = budgetController.text.trim();
-    final date = startingDateController.text.trim();
-    final totalDay = daysController.text.trim();
-    final image = pickedImage != null ? pickedImage!.path : "";
+  Future<void> addClicked(int index) async {
+    final editPageProvider = Provider.of<EditProvider>(context, listen: false);
+    final destination = editPageProvider.destinationController.text.trim();
+    final wayofTravel = editPageProvider.travellingController.text.trim();
+    final budget = editPageProvider.budgetController.text.trim();
+    final date = editPageProvider.startingDateController.text.trim();
+    final totalDay = editPageProvider.daysController.text.trim();
+    final image = editPageProvider.pickedImage!.path;
 
     final updated = TripModel(
       destination: destination,
@@ -277,7 +247,8 @@ class _AddPageState extends State<EditPage> {
       image: image,
     );
 
-    tripBox.add(updated);
-    clearText();
+    await TripOperations.updateTrip(index, updated);
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const AddScreen()));
   }
 }

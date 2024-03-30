@@ -3,21 +3,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_app/view/screens/home_screen.dart';
 import 'package:travel_app/view/screens/login/signup_screen.dart';
 
+class LogIn extends StatelessWidget {
+  LogIn({Key? key}) : super(key: key);
 
-class LogIn extends StatefulWidget {
-  const LogIn({Key? key}) : super(key: key);
-
-  @override
-  State<LogIn> createState() => _LogInState();
-}
-
-class _LogInState extends State<LogIn> {
   final _formKey = GlobalKey<FormState>();
 
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  Future<void> login() async {
+  Future<void> login(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? storedUsername = prefs.getString('username');
     String? storedPassword = prefs.getString('password');
@@ -154,7 +148,7 @@ class _LogInState extends State<LogIn> {
                       child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            login();
+                            login(context);
                           }
                         },
                         style: TextButton.styleFrom(
@@ -181,7 +175,7 @@ class _LogInState extends State<LogIn> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const SignUp(),
+                            builder: (context) => SignUp(),
                           ),
                         );
                       },

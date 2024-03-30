@@ -21,6 +21,7 @@ dependencies:
   intl:
   charts_flutter:
   pie_chart: ^5.4.0
+  provider: ^6.1.2
 
 flutter_launcher_icons:
   android: "launcher_icon"

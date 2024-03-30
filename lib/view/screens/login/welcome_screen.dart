@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:travel_app/view/screens/login/login_screen.dart';
@@ -11,6 +13,7 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('message');
     return Scaffold(
         body: Stack(
       children: [_backgroundImage(), _headerView(), _fotterView(context)],
@@ -65,7 +68,7 @@ class WelcomeScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const LogIn()));
+              MaterialPageRoute(builder: (context) => LogIn()));
               },
               style: TextButton.styleFrom(
                 textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500,color: Colors.black),
@@ -86,7 +89,7 @@ class WelcomeScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const SignUp()));
+              MaterialPageRoute(builder: (context) => SignUp()));
               },
               style: TextButton.styleFrom(
                 textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),

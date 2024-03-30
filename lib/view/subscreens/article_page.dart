@@ -88,7 +88,7 @@ class _ArticlePageState extends State<ArticlePage> {
                 backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 5, 191, 171)),
               ),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) =>  AddPage(initialDestination: widget.headingText)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>  const AddPage()));
               },
               child: const Text(
                 "Go here",

@@ -34,7 +34,7 @@ class TripOperations {
   static List<TripModel> searchTrips(List<TripModel> trips, String searchText) {
     return trips
         .where((trip) =>
-            trip.destination.toLowerCase().contains(searchText.toLowerCase()))
+            trip.destination.toLowerCase().contains(searchText.toLowerCase()) || trip.budget.toString().toLowerCase().contains(searchText.toLowerCase()))
         .toList();
   }
 }
