@@ -5,7 +5,7 @@ import 'package:travel_app/view/subscreens/detail_text.dart';
 
 class CompletedDetails extends StatefulWidget {
   const CompletedDetails(
-      {Key? key,
+      {super.key,
       required this.destination,
       required this.extraDay,
       required this.extraMoney,
@@ -38,6 +38,7 @@ class _DetailScreenState extends State<CompletedDetails> {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(221, 249, 247, 1),
       body: SingleChildScrollView(
+        // ignore: avoid_unnecessary_containers
         child: Container(
           child: Column(
             children: [

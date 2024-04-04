@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:travel_app/view/screens/login/welcome_screen.dart';
 import 'package:travel_app/view/subscreens/about.dart';
 import 'package:travel_app/view/subscreens/chart_screen.dart';
 import 'package:travel_app/view/subscreens/journal.dart';
@@ -8,15 +6,12 @@ import 'package:travel_app/view/subscreens/privacy.dart';
 import 'package:travel_app/view/subscreens/user_head.dart';
 import 'package:travel_app/view/subscreens/userlist.dart';
 import 'package:travel_app/view/widgets/bottom_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travel_app/view/screens/login/welcome_screen.dart';
 
-class UserScreen extends StatefulWidget {
+class UserScreen extends StatelessWidget {
   const UserScreen({super.key});
 
-  @override
-  State<UserScreen> createState() => _UserScreenState();
-}
-
-class _UserScreenState extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +72,7 @@ class _UserScreenState extends State<UserScreen> {
                   icon: const Icon(Icons.exit_to_app_rounded),
                   text: 'Log Out',
                   onpressed: () {
-                    logoutDialogue();
+                    logoutDialogue(context);
                   }),
             ],
           ),
@@ -86,10 +81,10 @@ class _UserScreenState extends State<UserScreen> {
       bottomNavigationBar: const CircularBottomBar(),
     );
   }
-
-  void logoutDialogue() {
+  void logoutDialogue(BuildContext context) { 
     showDialog(
         context: context,
+        
         useSafeArea: true,
         builder: (context) => AlertDialog(
               title: const Text('Log Out'),

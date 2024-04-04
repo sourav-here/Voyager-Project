@@ -9,7 +9,7 @@ import 'package:travel_app/view/subscreens/confirm_head.dart';
 import 'package:travel_app/view/widgets/bottom_bar.dart';
 
 class ConfirmScreen extends StatelessWidget {
-  const ConfirmScreen({Key? key});
+  const ConfirmScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

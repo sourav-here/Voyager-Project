@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:travel_app/controller/add_provider.dart';
 import 'package:travel_app/controller/edit_provider.dart';
-import 'package:travel_app/controller/search_provider.dart';
 import 'package:travel_app/model/complete_model/complete_model.dart';
 import 'package:travel_app/model/tripmodel/trip_model.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,7 +35,6 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => AddProvider()),
         ChangeNotifierProvider(create: (context) => EditProvider()),
-        ChangeNotifierProvider(create: (context) => SearchProvider()),
         ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class JournalPage extends StatelessWidget {
-  const JournalPage({Key? key});
+  const JournalPage({super.key,});
 
   @override
   Widget build(BuildContext context) {

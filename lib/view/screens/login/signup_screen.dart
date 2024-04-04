@@ -21,6 +21,7 @@ class SignUp extends StatelessWidget {
       shared.setString('password', password);
       shared.setBool(SplashScreenState.KEY, true);
 
+      // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(

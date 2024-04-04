@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 class ChartScreen extends StatefulWidget {
-  const ChartScreen({Key? key});
+  const ChartScreen({super.key});
 
   @override
   State<ChartScreen> createState() => _ChartScreenState();

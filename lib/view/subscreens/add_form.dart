@@ -80,6 +80,7 @@ class AddPageForm extends StatefulWidget {
   final TextInputType? keyboardtype;
 
   @override
+  // ignore: library_private_types_in_public_api
   _AddPageFormState createState() => _AddPageFormState();
 }
 

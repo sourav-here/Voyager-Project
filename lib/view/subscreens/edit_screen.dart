@@ -66,13 +66,13 @@ class _EditPageState extends State<EditPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 140),
                   width: double.infinity,
                   height: 130,
-                  child: provider.pickedImage != null
+                  child: provider.pickedImage != null 
                       ? Container(
                           width: 150,
                           height: 120,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(25),
-                            image: DecorationImage(
+                            image:  DecorationImage(
                               image: FileImage(provider.pickedImage!),
                               fit: BoxFit.cover,
                             ),
@@ -248,6 +248,7 @@ class _EditPageState extends State<EditPage> {
     );
 
     await TripOperations.updateTrip(index, updated);
+    // ignore: use_build_context_synchronously
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => const AddScreen()));
   }

@@ -8,7 +8,7 @@ import 'package:travel_app/view/subscreens/add_form.dart';
 
 class CompleteDetails extends StatefulWidget {
   const CompleteDetails(
-      {Key? key, required this.destination, required this.image});
+      {super.key, required this.destination, required this.image});
 
   final String destination;
   final String image;
@@ -115,10 +115,9 @@ class _CompleteDetailState extends State<CompleteDetails> {
                 },
                 style: ElevatedButton.styleFrom(
                   textStyle: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w500),
+                      fontSize: 16, fontWeight: FontWeight.w500), backgroundColor: const Color.fromARGB(255, 238, 139, 82),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
-                  primary: const Color.fromARGB(255, 238, 139, 82),
                 ),
                 child: const Text("Trip Done!",
                     style: TextStyle(color: Colors.white)),

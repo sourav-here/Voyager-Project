@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:travel_app/functions/functions.dart';
@@ -15,6 +14,7 @@ class AddScreen extends StatefulWidget {
   const AddScreen({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _AddScreenState createState() => _AddScreenState();
 }
 
@@ -31,7 +31,6 @@ class _AddScreenState extends State<AddScreen> {
 
   @override
   Widget build(BuildContext context) {
-    log('message');
     return Scaffold(
       backgroundColor: const Color.fromRGBO(221, 249, 247, 1),
       floatingActionButton: FloatingActionButton(
