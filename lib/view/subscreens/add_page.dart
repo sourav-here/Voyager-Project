@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travel_app/controller/add_provider.dart';
-import 'package:travel_app/functions/functions.dart';
+import 'package:travel_app/services/functions.dart';
 import 'package:travel_app/model/tripmodel/trip_model.dart';
 import 'package:travel_app/view/screens/add_screen.dart';
 import 'package:travel_app/view/screens/home_screen.dart';

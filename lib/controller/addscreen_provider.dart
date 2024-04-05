@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/functions/functions.dart';
+import 'package:travel_app/services/functions.dart';
 import 'package:travel_app/model/tripmodel/trip_model.dart';
 
 class TripProvider extends ChangeNotifier {

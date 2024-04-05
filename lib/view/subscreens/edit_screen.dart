@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travel_app/controller/edit_provider.dart';
-import 'package:travel_app/functions/functions.dart';
+import 'package:travel_app/services/functions.dart';
 import 'package:travel_app/model/tripmodel/trip_model.dart';
 import 'package:travel_app/view/screens/add_screen.dart';
 import 'package:travel_app/view/subscreens/add_form.dart';
