@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AddPageForm extends StatefulWidget {
+class AddPageForm extends StatelessWidget {
   const AddPageForm({
     Key? key,
     required this.hintText,
@@ -17,15 +17,9 @@ class AddPageForm extends StatefulWidget {
   final TextInputType? keyboardtype;
 
   @override
-  // ignore: library_private_types_in_public_api
-  _AddPageFormState createState() => _AddPageFormState();
-}
-
-class _AddPageFormState extends State<AddPageForm> {
-  int? _selectedYear;
-
-  @override
   Widget build(BuildContext context) {
+    int? selectedYear;
+
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Container(
@@ -46,25 +40,23 @@ class _AddPageFormState extends State<AddPageForm> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: TextFormField(
-            keyboardType: widget.keyboardtype,
+            keyboardType: keyboardtype,
             decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: widget.hintText,
+              hintText: hintText,
               hintStyle: const TextStyle(color: Color.fromARGB(206, 57, 15, 87)),
-              suffixIcon: widget.suffixIcon != null
+              suffixIcon: suffixIcon != null
                   ? DropdownButton<int>(
-                      icon: Icon(widget.suffixIcon),
+                      icon: Icon(suffixIcon),
                       iconSize: 24,
                       elevation: 16,
                       underline: Container(),
-                      value: _selectedYear,
+                      value: selectedYear,
                       onChanged: (int? newValue) {
-                        setState(() {
-                          _selectedYear = newValue;
-                          if (widget.controller != null) {
-                            widget.controller!.text = _selectedYear != null ? _selectedYear.toString() : '';
-                          }
-                        });
+                        selectedYear = newValue;
+                        if (controller != null) {
+                          controller!.text = selectedYear != null ? selectedYear.toString() : '';
+                        }
                       },
                       items: List.generate(77, (index) => index + 2024)
                           .map<DropdownMenuItem<int>>((int value) {
@@ -76,12 +68,11 @@ class _AddPageFormState extends State<AddPageForm> {
                     )
                   : null,
             ),
-            controller: widget.controller,
-            validator: widget.validator,
+            controller: controller,
+            validator: validator,
           ),
         ),
       ),
     );
   }
 }
-
