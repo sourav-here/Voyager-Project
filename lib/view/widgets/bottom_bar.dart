@@ -25,7 +25,7 @@ class CircularBottomBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(icon: const Icon(Icons.home, ), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()))),
-              IconButton(icon: const Icon(Icons.add_box_rounded, ), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AddScreen()))),
+              IconButton(icon: const Icon(Icons.add_box_rounded, ), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) =>  AddScreen()))),
               IconButton(icon: const Icon(Icons.view_list_rounded, ), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ConfirmScreen()))),
               IconButton(icon: const Icon(Icons.person_pin_rounded, ), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const UserScreen()))),
             ],

@@ -171,7 +171,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const AddScreen(),
+                      builder: (context) => AddScreen(),
                     ),
                   );
                 },

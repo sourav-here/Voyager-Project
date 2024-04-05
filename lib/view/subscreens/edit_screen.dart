@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -192,7 +190,7 @@ class _EditPageState extends State<EditPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const AddScreen()));
+                                builder: (context) => AddScreen()));
                       },
                       style: TextButton.styleFrom(
                         textStyle: const TextStyle(
@@ -250,6 +248,6 @@ class _EditPageState extends State<EditPage> {
     await TripOperations.updateTrip(index, updated);
     // ignore: use_build_context_synchronously
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const AddScreen()));
+        context, MaterialPageRoute(builder: (context) =>  AddScreen()));
   }
 }

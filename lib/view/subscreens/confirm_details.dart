@@ -127,7 +127,7 @@ class _CompleteDetailState extends State<CompleteDetails> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const AddScreen()),
+                    MaterialPageRoute(builder: (context) => AddScreen()),
                   );
                 },
                 child: const Text("Go back",

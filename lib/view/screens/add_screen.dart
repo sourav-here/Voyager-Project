@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:travel_app/functions/functions.dart';
-import 'package:travel_app/model/tripmodel/trip_model.dart';
+import 'package:provider/provider.dart';
+import 'package:travel_app/controller/addscreen_provider.dart';
 import 'package:travel_app/view/screens/details_screen.dart';
 import 'package:travel_app/view/subscreens/add_head.dart';
 import 'package:travel_app/view/subscreens/add_page.dart';
@@ -10,27 +10,15 @@ import 'package:travel_app/view/subscreens/edit_screen.dart';
 import 'package:travel_app/view/widgets/bottom_bar.dart';
 import 'package:travel_app/view/widgets/search.dart';
 
-class AddScreen extends StatefulWidget {
-  const AddScreen({Key? key}) : super(key: key);
 
-  @override
-  // ignore: library_private_types_in_public_api
-  _AddScreenState createState() => _AddScreenState();
-}
-
-class _AddScreenState extends State<AddScreen> {
-  List<TripModel> trips = [];
-  List<TripModel> filteredTrips = [];
-  List<int> tripSum = [];
-
-  @override
-  void initState() {
-    super.initState();
-    fetchTrips();
-  }
+class AddScreen extends StatelessWidget {
+  const AddScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var tripProvider = Provider.of<TripProvider>(context);
+    Provider.of<TripProvider>(context).fetchTrips();
+
     return Scaffold(
       backgroundColor: const Color.fromRGBO(221, 249, 247, 1),
       floatingActionButton: FloatingActionButton(
@@ -39,9 +27,10 @@ class _AddScreenState extends State<AddScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const AddPage()),
-          ).then((_) {
-            fetchTrips();
-          });
+          );
+          // .then((_) {
+          //   tripProvider.fetchTrips();
+          // });
         },
         child: const Icon(Icons.add_box_rounded),
       ),
@@ -79,16 +68,16 @@ class _AddScreenState extends State<AddScreen> {
             ),
             const SizedBox(height: 24),
             SearchBox(
-              onSearchTextChanged: searchTrips,
+              onSearchTextChanged: tripProvider.searchTrips,
             ),
             const SizedBox(height: 24),
             Expanded(
               child: ListView.builder(
-                itemCount: filteredTrips.length,
+                itemCount: tripProvider.filteredTrips.length,
                 itemBuilder: (context, index) {
-                  final trip = filteredTrips.reversed.toList()[index];
-                  tripSum.add(trip.budget);
-                  double totalTrip = tripSum
+                  final trip = tripProvider.filteredTrips.reversed.toList()[index];
+                  tripProvider.tripSum.add(trip.budget);
+                  double totalTrip = tripProvider.tripSum
                       .reduce((value, element) => value + element)
                       .toDouble();
                   TripData.totalValue = totalTrip;
@@ -183,7 +172,7 @@ class _AddScreenState extends State<AddScreen> {
                                   ),
                                   TextButton(
                                     onPressed: () {
-                                      deleteTrip(index);
+                                      tripProvider.deleteTrip(index);
                                       Navigator.of(context).pop();
                                     },
                                     child: const Text('Delete'),
@@ -205,24 +194,5 @@ class _AddScreenState extends State<AddScreen> {
       bottomNavigationBar: const CircularBottomBar(),
     );
   }
-
-  Future<void> deleteTrip(int index) async {
-    await TripOperations.deleteTrip(index);
-    fetchTrips();
-  }
-
-  Future<void> fetchTrips() async {
-    final fetchedTrips = await TripOperations.fetchTrips();
-    setState(() {
-      trips = fetchedTrips.reversed.toList();
-      filteredTrips = trips;
-    });
-  }
-
-  void searchTrips(String searchText) {
-    final searchedTrips = TripOperations.searchTrips(trips, searchText);
-    setState(() {
-      filteredTrips = searchedTrips;
-    });
-  }
 }
+

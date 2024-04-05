@@ -5,9 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:travel_app/view/screens/login/login_screen.dart';
 import 'package:travel_app/view/screens/login/signup_screen.dart';
 
-
-
-
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
 
