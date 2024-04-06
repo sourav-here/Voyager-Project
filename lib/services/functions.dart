@@ -8,6 +8,7 @@ class TripOperations {
     final tripBox = await Hive.openBox<TripModel>('tripBox');
     await tripBox.add(trip);
   }
+  
 
     static Future<void> completeTrip(CompleteModel tripDone) async {
     final completeBox = await Hive.openBox<CompleteModel>('completeBox');
