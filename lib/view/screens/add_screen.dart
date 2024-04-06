@@ -28,9 +28,6 @@ class AddScreen extends StatelessWidget {
             context,
             MaterialPageRoute(builder: (context) => const AddPage()),
           );
-          // .then((_) {
-          //   tripProvider.fetchTrips();
-          // });
         },
         child: const Icon(Icons.add_box_rounded),
       ),
