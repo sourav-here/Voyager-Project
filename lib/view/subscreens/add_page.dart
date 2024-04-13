@@ -9,8 +9,8 @@ import 'package:travel_app/view/subscreens/add_form.dart';
 
 class AddPage extends StatelessWidget {
   const AddPage({
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +25,11 @@ class AddPage extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 55),
-              
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 140),
                   width: double.infinity,
                   height: 130,
-                  child: addProvider.pickedImage != null 
+                  child: addProvider.pickedImage != null
                       ? Container(
                           width: 150,
                           height: 120,
@@ -54,7 +53,6 @@ class AddPage extends StatelessWidget {
                           ),
                         ),
                 ),
-
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
@@ -71,61 +69,66 @@ class AddPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 AddPageForm(
-                    hintText: "Destination",
-                    controller: addProvider.destinationController,
-                    keyboardtype: TextInputType.name,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'this is required';
-                      } else {
-                        return null;
-                      }
-                    }),
+                  hintText: "Destination",
+                  controller: addProvider.destinationController,
+                  keyboardtype: TextInputType.name,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'This field is required';
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
                 AddPageForm(
-                    hintText: "Way of Travelling",
-                    controller: addProvider.travellingController,
-                    keyboardtype: TextInputType.name,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'this is required';
-                      } else {
-                        return null;
-                      }
-                    }),
+                  hintText: "Way of Travelling",
+                  controller: addProvider.travellingController,
+                  keyboardtype: TextInputType.name,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'This field is required';
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
                 AddPageForm(
-                    hintText: "Budget",
-                    controller: addProvider.budgetController,
-                    keyboardtype: TextInputType.number,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'this is required';
-                      } else {
-                        return null;
-                      }
-                    }),
+                  hintText: "Budget",
+                  controller: addProvider.budgetController,
+                  keyboardtype: TextInputType.number,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'This field is required';
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
                 AddPageForm(
-                    hintText: "Year",
-                    controller: addProvider.startingDateController,
-                    suffixIcon: Icons.keyboard_arrow_down_rounded,
-                    keyboardtype: TextInputType.number,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'this is required';
-                      } else {
-                        return null;
-                      }
-                    }),
+                  hintText: "Year",
+                  controller: addProvider.startingDateController,
+                  suffixIcon: Icons.keyboard_arrow_down_rounded,
+                  keyboardtype: TextInputType.number,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'This field is required';
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
                 AddPageForm(
-                    hintText: "Total days",
-                    controller: addProvider.daysController,
-                    keyboardtype: TextInputType.number,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'this is required';
-                      } else {
-                        return null;
-                      }
-                    }),
+                  hintText: "Total days",
+                  controller: addProvider.daysController,
+                  keyboardtype: TextInputType.number,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'This field is required';
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
                 const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -149,9 +152,11 @@ class AddPage extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>  AddScreen()));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>  AddScreen(),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         textStyle: const TextStyle(
@@ -168,14 +173,18 @@ class AddPage extends StatelessWidget {
                 TextButton(
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomeScreen()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomeScreen(),
+                      ),
+                    );
                   },
                   child: const Text(
                     "Go Home",
                     style: TextStyle(
-                        color: Color.fromARGB(255, 238, 139, 82), fontSize: 16),
+                      color: Color.fromARGB(255, 238, 139, 82),
+                      fontSize: 16,
+                    ),
                   ),
                 ),
               ],
@@ -187,19 +196,19 @@ class AddPage extends StatelessWidget {
   }
 
   Future<void> addButtonClicked(
-      BuildContext context, AddProvider addProvider) async {
+    BuildContext context, AddProvider addProvider) async {
     final destination = addProvider.destinationController.text.trim();
     final wayofTravel = addProvider.travellingController.text.trim();
     final budget = addProvider.budgetController.text.trim();
     final date = addProvider.startingDateController.text.trim();
     final totalDay = addProvider.daysController.text.trim();
-    final image = addProvider.pickedImage!.path;
+    final image = addProvider.pickedImage != null ? addProvider.pickedImage!.path : '';
+
     if (destination.isEmpty ||
         wayofTravel.isEmpty ||
         budget.isEmpty ||
         date.isEmpty ||
-        totalDay.isEmpty ||
-        image.isEmpty) {
+        totalDay.isEmpty) {
       return;
     }
 
@@ -220,7 +229,6 @@ class AddPage extends StatelessWidget {
     );
 
     await TripOperations.addTrip(trip);
-    // ignore: use_build_context_synchronously
     Navigator.pop(context);
   }
 }

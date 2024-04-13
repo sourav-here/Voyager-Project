@@ -5,14 +5,15 @@ import 'package:travel_app/view/subscreens/confirm_details.dart';
 import 'package:travel_app/view/subscreens/detail_text.dart';
 
 class DetailScreen extends StatefulWidget {
-  const DetailScreen(
-      {super.key,
-      required this.destination,
-      required this.wayofTravel,
-      required this.budget,
-      this.date,
-      this.totalDay,
-      this.image});
+  const DetailScreen({
+    Key? key,
+    required this.destination,
+    required this.wayofTravel,
+    required this.budget,
+    this.date,
+    this.totalDay,
+    this.image,
+  }) : super(key: key);
 
   final String destination;
   final String wayofTravel;
@@ -26,16 +27,18 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  File? selectedimage;
-  String? destination;
-  String? budget;
+  late File? selectedimage;
+  late String? destination;
+  late String? budget;
 
   @override
   void initState() {
-    selectedimage = widget.image != '' ? File(widget.image!) : null;
+    super.initState();
+    selectedimage = widget.image != null && widget.image!.isNotEmpty
+        ? File(widget.image!)
+        : null;
     destination = widget.destination;
     budget = widget.budget;
-    super.initState();
   }
 
   @override
@@ -70,9 +73,9 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: widget.image != null
-                        ? Image(
-                            image: FileImage(File(widget.image!)),
+                    child: selectedimage != null
+                        ? Image.file(
+                            selectedimage!,
                             fit: BoxFit.cover,
                           )
                         : Image.asset(

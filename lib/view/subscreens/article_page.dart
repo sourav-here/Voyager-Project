@@ -27,7 +27,7 @@ class _ArticlePageState extends State<ArticlePage> {
     @override
   void initState() {
     super.initState();
-    tripBox = Hive.box<TripModel>('tripBox');
+    // tripBox = Hive.box<TripModel>('tripBox');
   }
 
   @override
